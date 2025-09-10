@@ -31,7 +31,9 @@ function LoginScreen() {
   }
 
   async function LogIn() {
-    const httpResponse = await api(`${devServerUrl}/api/`)
+    const httpResponse = await api(`${devServerUrl}/api/login`, { method: 'POST', body: JSON.stringify(user) });
+
+    setStatusCode(httpResponse.status);
   }
 
   function handleNameChange(e) {

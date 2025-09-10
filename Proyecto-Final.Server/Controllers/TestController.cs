@@ -78,7 +78,24 @@ namespace Proyecto_Final.Server.Controllers
 
 			JObject jsonObj = JObject.Parse(json);
 
-			return Ok();
+			//var matchID = (from r in _context.Respondents
+			//			where (r.Name == jsonObj["name"].ToString() && r.Email == jsonObj["email"].ToString())
+			//			select r.Id).First();
+
+			var ID = _context.Respondents
+						.Where(c => c.Name == jsonObj["name"].ToString() && c.Email == jsonObj["email"].ToString())
+						.FirstOrDefault(new Respondent() { Id = -1 })
+						.Id;
+
+			if (ID != -1)
+			{
+				return Ok();
+			}
+			{
+				return BadRequest();
+			}
+
+				return Ok();
 		}
 	}
 }
