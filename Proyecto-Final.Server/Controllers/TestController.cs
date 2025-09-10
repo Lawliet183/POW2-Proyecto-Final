@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using System.Reflection.Metadata.Ecma335;
 using System.Net;
 using System.Net.Http.Headers;
+using Devart.Common;
+using Devart.Data.MySql.Entity;
 
 namespace Proyecto_Final.Server.Controllers
 {
@@ -34,38 +36,35 @@ namespace Proyecto_Final.Server.Controllers
 		[HttpPost]
 		public IActionResult Post(object user)
 		{
-			//string json = httpRequest.QueryString.ToString();
-
-			//string json = "";
-			//user.Values().ToList().ForEach(s => json += s);
-
+			// Parse the JSON
 			string json = user.ToString();
 
 			JObject jsonObj = JObject.Parse(json);
 
-			//Console.WriteLine($"\n{jsonObj.ToString()}");
-
-			//HttpContext.Response.Headers["Access-Control-Allow-Origin"] = "*";
-
+			// Add the respondent entity
 			Respondent respondent = new Respondent();
 
 			respondent.Name = jsonObj["name"].ToString();
 			respondent.Email = jsonObj["email"].ToString();
 
+			_context.Respondents.Add(respondent);
+			_context.SaveChanges();
+
+			
+			// Get the last respondent ID
+			var ID = _context.Respondents.Order().Last().Id;
+
+			// Add the auth entity
 			Auth auth = new Auth();
 
+			auth.RespondentId = ID;
 			auth.PasswordHash = jsonObj["passwordhash"].ToString();
 			auth.Role = jsonObj["role"].ToString();
 
-			_context.Respondents.Add(respondent);
-
-			_context.Respondents.
 			_context.Auths.Add(auth);
-			
 
+			// Write changes to the DB
 			_context.SaveChanges();
-
-			//Console.WriteLine(name);
 
 			return Ok();
 		}
