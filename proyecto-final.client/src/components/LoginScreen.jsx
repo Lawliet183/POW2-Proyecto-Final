@@ -1,56 +1,72 @@
 ﻿import { useState } from 'react';
 
+
+const api = (path, options = {}) =>
+  fetch(path, { credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, ...options });
+
+
 function LoginScreen() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [statusCode, setStatusCode] = useState(0);
-  const [responseData, setResponseData] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [passwordHash, setPasswordHash] = useState("");
 
   const devServerUrl = import.meta.env.VITE_DEV_SERVER_URL;
 
-  //const api = (path, options = {}) =>
-  //  fetch(path, { credentials: 'include', headers: { 'Content-Type': 'application/json' }, ...options });
+  const user = {
+    name: name,
+    email: email,
+    passwordHash: passwordHash,
+    //role: "admin"
+  }
 
-  async function LogIn() {
-    
-
-    const user = {
-      name: "Liam",
-      email: "liam@google.com",
-      passwordhash: "123qwe",
-      role: "admin"
-    }
-
-    const httpResponse = await fetch(`${devServerUrl}/api/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) });
+  async function SignUp() {
+    const httpResponse = await api(`${devServerUrl}/api/register`, { method: 'POST', body: JSON.stringify(user) });
 
     setStatusCode(httpResponse.status);
 
-    if (!httpResponse.ok) {
-      return;
-    }
-
-    let data = "";
-    try {
-      data = await httpResponse.json();
-    } catch (err) {
-      setIsLoaded(false);
-    }
-
-    if (!data.error) {
-      setIsLoaded(true);
-
-      console.log(data);
-
-      setResponseData(data);
-    }
+    //if (!httpResponse.ok) {
+    //  return;
+    //}
   }
+
+  async function LogIn() {
+    const httpResponse = await api(`${devServerUrl}/api/`)
+  }
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+
+  function handlePasswordHashChange(e) {
+    setPasswordHash(e.target.value);
+  }
+
 
   return (
     <div>
-      <p>is Loaded?: {isLoaded ? 'yes' : 'no'}</p>
+      <div>
+        <label>Nombre</label><br />
+        <input type="text" onChange={handleNameChange} />
+      </div>
+      <div>
+        <label>Correo</label><br />
+        <input type="email" onChange={handleEmailChange} />
+      </div>
+      <div>
+        <label>Contraseña</label><br />
+        <input type="password" onChange={handlePasswordHashChange} />
+      </div>
       <p>Status code: {statusCode}</p>
-      <button onClick={LogIn}>Iniciar sesion</button>
+      <button onClick={LogIn}>Iniciar sesión</button>
+      <button onClick={SignUp}>Registrarse</button>
     </div>
   );
 }
+
 
 export default LoginScreen;

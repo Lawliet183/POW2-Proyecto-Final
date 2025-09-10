@@ -34,7 +34,7 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("register")]
 		[HttpPost]
-		public IActionResult Post(object user)
+		public IActionResult Register(object user)
 		{
 			// Parse the JSON
 			string json = user.ToString();
@@ -58,13 +58,25 @@ namespace Proyecto_Final.Server.Controllers
 			Auth auth = new Auth();
 
 			auth.RespondentId = ID;
-			auth.PasswordHash = jsonObj["passwordhash"].ToString();
-			auth.Role = jsonObj["role"].ToString();
+			auth.PasswordHash = jsonObj["passwordHash"].ToString();
+			auth.Role = jsonObj["role"]?.ToString();
 
 			_context.Auths.Add(auth);
 
 			// Write changes to the DB
 			_context.SaveChanges();
+
+			return new CreatedResult();
+		}
+
+		[Route("login")]
+		[HttpPost]
+		public IActionResult LogIn(object user)
+		{
+			// Parse the JSON
+			string json = user.ToString();
+
+			JObject jsonObj = JObject.Parse(json);
 
 			return Ok();
 		}
