@@ -1,12 +1,54 @@
 import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 import LoginScreen from '@/components/LoginScreen';
+import MainMenuScreen from '@/components/MainMenuScreen';
 
 import './App.css';
 
+
+const api = (path, options = {}) =>
+  fetch(path, { credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, ...options });
+
+
 function App() {
+  const [currentScreen, setCurrentScreen] = useState('login');
+
+
+  useEffect(() => {
+    const isLoggedIn = Cookies.get('isLoggedIn');
+    if (isLoggedIn) {
+      setCurrentScreen('main-menu');
+    }
+  }, []);
+
+
+  function handleLoginSuccess() {
+    setCurrentScreen('main-menu');
+  }
+
+
+  let content;
+  switch (currentScreen) {
+    case 'login': {
+      content = <LoginScreen onLoginSuccess={handleLoginSuccess} api={api} />;
+      break;
+    }
+    case 'main-menu': {
+      content = <MainMenuScreen />;
+      break;
+    }
+    default: {
+      content = null;
+      break;
+    }
+  }
+
+
   return (
-    <LoginScreen />
+    <>
+      {content}
+    </>
   );
 
     //const [forecasts, setForecasts] = useState();

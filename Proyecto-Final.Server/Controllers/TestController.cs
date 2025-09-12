@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using Devart.Common;
 using Devart.Data.MySql.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Proyecto_Final.Server.Controllers
 {
@@ -44,8 +45,8 @@ namespace Proyecto_Final.Server.Controllers
 			// Add the respondent entity
 			Respondent respondent = new Respondent();
 
-			respondent.Name = jsonObj["name"].ToString();
-			respondent.Email = jsonObj["email"].ToString();
+			respondent.Name = jsonObj["name"].ToString().Trim();
+			respondent.Email = jsonObj["email"].ToString().Trim();
 
 			_context.Respondents.Add(respondent);
 			_context.SaveChanges();
@@ -58,8 +59,8 @@ namespace Proyecto_Final.Server.Controllers
 			Auth auth = new Auth();
 
 			auth.RespondentId = ID;
-			auth.PasswordHash = jsonObj["passwordHash"].ToString();
-			auth.Role = jsonObj["role"]?.ToString();
+			auth.PasswordHash = jsonObj["passwordHash"].ToString().Trim();
+			auth.Role = jsonObj["role"]?.ToString().Trim();
 
 			_context.Auths.Add(auth);
 
@@ -71,7 +72,7 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("login")]
 		[HttpPost]
-		public IActionResult LogIn(object user)
+		public async Task<IActionResult> LogIn(object user)
 		{
 			// Parse the JSON
 			string json = user.ToString();
@@ -82,20 +83,32 @@ namespace Proyecto_Final.Server.Controllers
 			//			where (r.Name == jsonObj["name"].ToString() && r.Email == jsonObj["email"].ToString())
 			//			select r.Id).First();
 
-			var ID = _context.Respondents
-						.Where(c => c.Name == jsonObj["name"].ToString() && c.Email == jsonObj["email"].ToString())
-						.FirstOrDefault(new Respondent() { Id = -1 })
-						.Id;
+			var q = _context.Respondents
+						.Where(c => c.Name == jsonObj["name"].ToString().Trim() && c.Email == jsonObj["email"].ToString())
+						.ToList();
 
-			if (ID != -1)
-			{
-				return Ok();
-			}
+			//System.FormattableString query = $"SELECT R.Id FROM Respondent as R WHERE R.Name == '{jsonObj["name"].ToString().Trim()}' AND R.Email == '{jsonObj["email"].ToString().Trim()}'";
+
+			//var q = _context.Database.Execute(query);
+
+			if (q.Count <= 0)
 			{
 				return BadRequest();
 			}
-
+			else
+			{
 				return Ok();
+			}
+
+			//if (ID != -1)
+			//{
+			//	return Ok();
+			//}
+			//{
+			//	return BadRequest();
+			//}
+
+			//	return Ok();
 		}
 	}
 }
