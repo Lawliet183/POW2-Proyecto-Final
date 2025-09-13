@@ -11,6 +11,8 @@ import './App.css';
 const api = (path, options = {}) =>
   fetch(path, { credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, ...options });
 
+const devServerUrl = import.meta.env.VITE_DEV_SERVER_URL;
+
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('login');
@@ -40,7 +42,7 @@ function App() {
   let content;
   switch (currentScreen) {
     case 'login': {
-      content = <LoginScreen onLoginSuccess={handleLoginSuccess} api={api} />;
+      content = <LoginScreen onLoginSuccess={handleLoginSuccess} api={api} devServerUrl={devServerUrl} />;
       break;
     }
     case 'main-menu': {
@@ -48,7 +50,7 @@ function App() {
       break;
     }
     case 'survey': {
-      content = <SurveyScreen />
+      content = <SurveyScreen api={api} devServerUrl={devServerUrl} />
       break;
     }
     default: {

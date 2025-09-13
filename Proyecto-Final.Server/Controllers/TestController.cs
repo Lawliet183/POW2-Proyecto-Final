@@ -115,13 +115,44 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("survey")]
 		[HttpGet]
-		public IActionResult Survey()
+		public string Survey()
 		{
-			var survey = _context.Surveys.FirstOrDefault();
-			var questions = _context.Questions.ToList();
-			var choices = _context.Choices.ToList();
+			Survey survey = _context.Surveys.AsNoTracking().FirstOrDefault();
+			//string surveyJson = JsonConvert.SerializeObject(survey);
 
-			return Ok();
+
+			List<Question> questions = _context.Questions.AsNoTracking().ToList();
+			//string questionsJson = JsonConvert.SerializeObject(questions);
+			JArray questionsArray = JArray.FromObject(questions);
+
+			List<Choice> choices = _context.Choices.AsNoTracking().ToList();
+			//string choicesJson = JsonConvert.SerializeObject(choices);
+			JArray choicesArray = JArray.FromObject(choices);
+
+			//JObject finalObject = new JObject([surveyJson, questionsJson, choicesJson]);
+
+			//JObject finalObject = new JObject([survey, questions, choices]);
+
+			//string finalJson = JsonConvert.SerializeObject(finalObject);
+
+			
+
+			JObject finalObject = new JObject
+			{
+				["survey"] = JObject.FromObject(survey),
+				["questions"] = questionsArray,
+				["choices"] = choicesArray
+			};
+
+			//JArray x = new JArray(finalObject);
+
+			return new JArray(finalObject).ToString();
+
+			//return JsonConvert.SerializeObject(survey);
+
+			//return Ok();
+
+			//return "";
 		}
 	}
 }

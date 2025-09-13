@@ -1,13 +1,11 @@
 ﻿import { useState } from 'react';
 import Cookies from 'js-cookie';
 
-function LoginScreen({ onLoginSuccess, api }) {
+function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
   const [statusCode, setStatusCode] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [passwordHash, setPasswordHash] = useState("");
-
-  const devServerUrl = import.meta.env.VITE_DEV_SERVER_URL;
 
   const user = {
     name: name,
