@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 
 import LoginScreen from '@/components/LoginScreen';
 import MainMenuScreen from '@/components/MainMenuScreen';
+import SurveyScreen from '@/components/SurveyScreen';
 
 import './App.css';
 
@@ -27,6 +28,14 @@ function App() {
     setCurrentScreen('main-menu');
   }
 
+  function handleLogOut() {
+    setCurrentScreen('login');
+  }
+
+  function handleSurveyLoad() {
+    setCurrentScreen('survey');
+  }
+
 
   let content;
   switch (currentScreen) {
@@ -35,7 +44,11 @@ function App() {
       break;
     }
     case 'main-menu': {
-      content = <MainMenuScreen />;
+      content = <MainMenuScreen onLogOut={handleLogOut} onSurveyLoad={handleSurveyLoad} />;
+      break;
+    }
+    case 'survey': {
+      content = <SurveyScreen />
       break;
     }
     default: {

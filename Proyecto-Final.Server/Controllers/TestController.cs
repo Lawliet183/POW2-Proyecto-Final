@@ -19,12 +19,14 @@ namespace Proyecto_Final.Server.Controllers
 
 		public readonly ProyectoEncuestaContext _context;
 
+
 		public TestController(ILogger<TestController> logger)
 		{
 			_logger = logger;
 
 			_context = new ProyectoEncuestaContext();
 		}
+
 
 		[Route("ping")]
 		[HttpGet]
@@ -72,7 +74,7 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("login")]
 		[HttpPost]
-		public async Task<IActionResult> LogIn(object user)
+		public IActionResult LogIn(object user)
 		{
 			// Parse the JSON
 			string json = user.ToString();
@@ -109,6 +111,17 @@ namespace Proyecto_Final.Server.Controllers
 			//}
 
 			//	return Ok();
+		}
+
+		[Route("survey")]
+		[HttpGet]
+		public IActionResult Survey()
+		{
+			var survey = _context.Surveys.FirstOrDefault();
+			var questions = _context.Questions.ToList();
+			var choices = _context.Choices.ToList();
+
+			return Ok();
 		}
 	}
 }
