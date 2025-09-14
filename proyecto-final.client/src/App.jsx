@@ -19,6 +19,7 @@ function App() {
 
 
   useEffect(() => {
+    //fetch(`${devServerUrl}/api/ping`);
     const isLoggedIn = Cookies.get('isLoggedIn');
     if (isLoggedIn) {
       setCurrentScreen('main-menu');

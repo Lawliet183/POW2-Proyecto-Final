@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using Devart.Common;
 using Devart.Data.MySql.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Proyecto_Final.Server.Controllers
 {
@@ -163,6 +164,18 @@ namespace Proyecto_Final.Server.Controllers
 			//return "";
 
 			return finalObject.ToString();
+		}
+
+		[Route("submit-answers")]
+		[HttpPost]
+		public IActionResult SubmitAnswers([FromForm] IFormCollection form)
+		{
+			//foreach (var item in form)
+			//{
+			//	Console.WriteLine(item);
+			//}
+
+			return Ok();
 		}
 	}
 }

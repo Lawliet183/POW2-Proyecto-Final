@@ -13,51 +13,28 @@ function SurveyScreen({ api, devServerUrl }) {
     console.log('Fetch successful');
   }
 
+  async function handleFormSubmit(e) {
+    e.preventDefault();
 
-  //const survey = content.map(x => {
-  //  const surveyField = x.survey.map(y => {
-  //    return (
-  //      <div>
-  //        <h1>{y.Title}</h1>
-  //        <p>{y.Description}</p>
-  //        <p>Status: {y.Status}</p>
-  //      </div>
-  //    );
-  //  });
+    const form = e.target;
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData);
 
-  //  return surveyField;
-  //});
+    const response = await fetch(`${devServerUrl}/api/submit-answers`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params
+    });
 
-  //const survey =
-  //  <div>
-  //    <h1>{content && content['survey']['Title']}</h1>
-  //    <p>{content && content['survey']['Description']}</p>
-  //    <p>Status: {content && content['survey']['Status']}</p>
-  //  </div>
-  //;
-
-  let survey;
-  let questions;
-  let choices;
-
-  //Object.keys(content).forEach(value => {
-  //  if (value == 'survey') {
-  //    survey =
-  //      <div>
-  //        <h1>{content[value]['Title']}</h1>
-  //        <p>{content[value]['Description']}</p>
-  //      </div>
-  //      ;
-  //  } else if (value == 'questions') {
-  //    questions =
-        
-  //  }
-  //});
+    if (response.status == 200) {
+      console.log('sent successfully');
+    }
+  }
 
 
   let form;
   if (Object.keys(content).length > 0) {
-    const html = (content.questions || []).map(q => {
+    const html = (content.questions || []).map((q, i) => {
       let questionItem;
 
       if (q.Type === 'text') {
@@ -72,33 +49,33 @@ function SurveyScreen({ api, devServerUrl }) {
         questionItem = <input type="date" name={`q_${q.Id}`} />;
       }
       if (q.Type === 'single') {
-        questionItem = (q.Choices || []).map(c => {
+        questionItem = (q.Choices || []).map((c, i) => {
           return (
-            <>
+            <div key={i}>
               <label>
                 <input type="radio" name={`q_${q.Id}`} value={c.Id} />
                   {c.Label}
               </label><br />
-            </>
+            </div>
           );
         });
       }
       if (q.Type === 'multi') {
-        questionItem = (q.Choices || []).map(c => {
+        questionItem = (q.Choices || []).map((c, i) => {
           return (
-            <>
-              <label>
+            <div key={i}>
+              <label key={i}>
                 <input type="checkbox" name={`q_${q.Id}`} value={c.Id} />
                   {c.Label}
               </label><br />
-            </>
+            </div>
           );
         });
       }
 
 
       return (
-        <fieldset>
+        <fieldset key={i}>
           <legend>{q.Position}. {q.Text}</legend>
 
           <div>
@@ -109,10 +86,11 @@ function SurveyScreen({ api, devServerUrl }) {
     });
 
     form =
-      <form id="encuesta-ia" method="post" action="#">
+      <form id="encuesta" method="post" action={`${devServerUrl}/api/submit-answers`} onSubmit={handleFormSubmit}>
         <h1>{content['survey']['Title']}</h1>
         <p>{content['survey']['Description']}</p>
         {html}
+        <button>Enviar respuesta</button>
       </form>
 
     ////////////////////
