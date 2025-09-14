@@ -129,6 +129,14 @@ namespace Proyecto_Final.Server.Controllers
 			//string choicesJson = JsonConvert.SerializeObject(choices);
 			JArray choicesArray = JArray.FromObject(choices);
 
+			//( (JObject) questionsArray[0] )["Choices"] = JArray.FromObject(choicesArray.Where(x => x["QuestionId"] == questionsArray[0]["Id"]));
+
+			foreach (var question in questionsArray)
+			{
+				var test = choicesArray.Where(x => x["QuestionId"].Value<int>() == question["Id"].Value<int>()).ToList();
+				question["Choices"] = JArray.FromObject(test);
+			}
+
 			//JObject finalObject = new JObject([surveyJson, questionsJson, choicesJson]);
 
 			//JObject finalObject = new JObject([survey, questions, choices]);
@@ -140,19 +148,21 @@ namespace Proyecto_Final.Server.Controllers
 			JObject finalObject = new JObject
 			{
 				["survey"] = JObject.FromObject(survey),
-				["questions"] = questionsArray,
-				["choices"] = choicesArray
+				["questions"] = questionsArray
+				//["choices"] = choicesArray
 			};
 
 			//JArray x = new JArray(finalObject);
 
-			return new JArray(finalObject).ToString();
+			//return new JArray(finalObject).ToString();
 
 			//return JsonConvert.SerializeObject(survey);
 
 			//return Ok();
 
 			//return "";
+
+			return finalObject.ToString();
 		}
 	}
 }

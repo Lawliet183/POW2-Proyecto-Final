@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 
 function SurveyScreen({ api, devServerUrl }) {
-  const [content, setContent] = useState([])
+  const [content, setContent] = useState({});
 
 
   async function handleLoadSurvey() {
@@ -28,20 +28,103 @@ function SurveyScreen({ api, devServerUrl }) {
   //  return surveyField;
   //});
 
-  const survey = 
-    <div>
-      <h1>{content.survey.Title}</h1>
-      <p>{content.Description}</p>
-      <p>Status: {content.Status}</p>
-    </div>
-  ;
+  //const survey =
+  //  <div>
+  //    <h1>{content && content['survey']['Title']}</h1>
+  //    <p>{content && content['survey']['Description']}</p>
+  //    <p>Status: {content && content['survey']['Status']}</p>
+  //  </div>
+  //;
+
+  let survey;
+  let questions;
+  let choices;
+
+  //Object.keys(content).forEach(value => {
+  //  if (value == 'survey') {
+  //    survey =
+  //      <div>
+  //        <h1>{content[value]['Title']}</h1>
+  //        <p>{content[value]['Description']}</p>
+  //      </div>
+  //      ;
+  //  } else if (value == 'questions') {
+  //    questions =
+        
+  //  }
+  //});
+
+
+  let form;
+  if (Object.keys(content).length > 0) {
+    const html = (content.questions || []).map(q => {
+      let questionItem;
+
+      if (q.Type === 'text') {
+        questionItem = <input name={`q_${q.Id}`} placeholder="Tu respuesta" />;
+      }
+      if (q.Type === 'number') {
+        const min = q.Min_value ?? '';
+        const max = q.Max_value ?? '';
+        questionItem = <input type="number" name={`q_${q.Id}`} min={min} max={max} />;
+      }
+      if (q.Type === 'date') {
+        questionItem = <input type="date" name={`q_${q.Id}`} />;
+      }
+      if (q.Type === 'single') {
+        questionItem = (q.Choices || []).map(c => {
+          return (
+            <>
+              <label>
+                <input type="radio" name={`q_${q.Id}`} value={c.Id} />
+                  {c.Label}
+              </label><br />
+            </>
+          );
+        });
+      }
+      if (q.Type === 'multi') {
+        questionItem = (q.Choices || []).map(c => {
+          return (
+            <>
+              <label>
+                <input type="checkbox" name={`q_${q.Id}`} value={c.Id} />
+                  {c.Label}
+              </label><br />
+            </>
+          );
+        });
+      }
+
+
+      return (
+        <fieldset>
+          <legend>{q.Position}. {q.Text}</legend>
+
+          <div>
+            {questionItem}
+          </div>
+        </fieldset>
+      );
+    });
+
+    form =
+      <form id="encuesta-ia" method="post" action="#">
+        <h1>{content['survey']['Title']}</h1>
+        <p>{content['survey']['Description']}</p>
+        {html}
+      </form>
+
+    ////////////////////
+    console.log(content);
+  }
 
 
   return (
     <div>
       <p>The survey should be shown here</p>
       <button onClick={handleLoadSurvey}>Load survey</button>
-      {survey}
+      {form}
     </div>
   );
 }
