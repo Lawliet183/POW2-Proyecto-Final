@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9ED1F12-0872-4A20-B791-5C0812095A1A}|Proyecto-Final.Server\\Proyecto-Final.Server.csproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.server\\controllers\\backendcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9ED1F12-0872-4A20-B791-5C0812095A1A}|Proyecto-Final.Server\\Proyecto-Final.Server.csproj|solutionrelative:proyecto-final.server\\controllers\\backendcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\mainmenuscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\mainmenuscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\loginscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\loginscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\surveyscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\surveyscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\mainmenuscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\mainmenuscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\answersscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\answersscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\loginscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\loginscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\surveyscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|solutionrelative:proyecto-final.client\\src\\components\\surveyscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A9ED1F12-0872-4A20-B791-5C0812095A1A}|Proyecto-Final.Server\\Proyecto-Final.Server.csproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.server\\controllers\\backendcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9ED1F12-0872-4A20-B791-5C0812095A1A}|Proyecto-Final.Server\\Proyecto-Final.Server.csproj|solutionrelative:proyecto-final.server\\controllers\\backendcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE11FA56-9CE3-10C0-2F81-E1D6E9544773}|proyecto-final.client\\proyecto-final.client.esproj|l:\\programming\\visual studio\\programacion orientada a la web ii\\proyecto-final\\proyecto-final.client\\src\\components\\surveyansweredscreen.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -38,11 +42,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
+              "Title": ".env",
+              "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\.env",
+              "RelativeDocumentMoniker": "proyecto-final.client\\.env",
+              "ToolTip": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\.env",
+              "RelativeToolTip": "proyecto-final.client\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-15T19:19:40.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AnswersScreen.jsx",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\AnswersScreen.jsx",
               "RelativeDocumentMoniker": "proyecto-final.client\\src\\components\\AnswersScreen.jsx",
@@ -54,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "SurveyAnsweredScreen.jsx",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\SurveyAnsweredScreen.jsx",
               "RelativeDocumentMoniker": "proyecto-final.client\\src\\components\\SurveyAnsweredScreen.jsx",
@@ -66,43 +82,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "SurveyScreen.jsx",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\SurveyScreen.jsx",
               "RelativeDocumentMoniker": "proyecto-final.client\\src\\components\\SurveyScreen.jsx",
               "ToolTip": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\SurveyScreen.jsx",
               "RelativeToolTip": "proyecto-final.client\\src\\components\\SurveyScreen.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-09-13T16:31:30.054Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "App.jsx",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\App.jsx",
               "RelativeDocumentMoniker": "proyecto-final.client\\src\\App.jsx",
               "ToolTip": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\App.jsx",
               "RelativeToolTip": "proyecto-final.client\\src\\App.jsx",
-              "ViewState": "AgIAAC4AAAAAAAAAAAA0wD4AAAB5AAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAiwEIAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-09-07T17:33:11.352Z"
+              "WhenOpened": "2025-09-07T17:33:11.352Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "LoginScreen.jsx",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\LoginScreen.jsx",
               "RelativeDocumentMoniker": "proyecto-final.client\\src\\components\\LoginScreen.jsx",
               "ToolTip": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\LoginScreen.jsx",
               "RelativeToolTip": "proyecto-final.client\\src\\components\\LoginScreen.jsx",
-              "ViewState": "AgIAABoAAAAAAAAAAAAQwDMAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-09-07T19:25:41.911Z"
+              "WhenOpened": "2025-09-07T19:25:41.911Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "MainMenuScreen.jsx",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\proyecto-final.client\\src\\components\\MainMenuScreen.jsx",
               "RelativeDocumentMoniker": "proyecto-final.client\\src\\components\\MainMenuScreen.jsx",
@@ -110,21 +128,19 @@
               "RelativeToolTip": "proyecto-final.client\\src\\components\\MainMenuScreen.jsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2025-09-10T21:40:27.234Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T21:40:27.234Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "BackendController.cs",
               "DocumentMoniker": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\Proyecto-Final.Server\\Controllers\\BackendController.cs",
               "RelativeDocumentMoniker": "Proyecto-Final.Server\\Controllers\\BackendController.cs",
               "ToolTip": "L:\\Programming\\Visual Studio\\Programacion Orientada a la Web II\\Proyecto-Final\\Proyecto-Final.Server\\Controllers\\BackendController.cs",
               "RelativeToolTip": "Proyecto-Final.Server\\Controllers\\BackendController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowHoAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T17:58:20.801Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-07T17:58:20.801Z"
             }
           ]
         }

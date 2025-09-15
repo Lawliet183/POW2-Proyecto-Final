@@ -151,8 +151,6 @@ function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
 
   return (
     <div>
-      {/*<p>The survey should be shown here</p>*/}
-      {/*<button onClick={handleLoadSurvey}>Load survey</button>*/}
       {form}
     </div>
   );

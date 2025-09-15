@@ -32,7 +32,7 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("ping")]
 		[HttpGet]
-		public IActionResult Get()
+		public IActionResult Ping()
 		{
 			return Ok();
 		}
@@ -57,7 +57,7 @@ namespace Proyecto_Final.Server.Controllers
 
 			
 			// Get the last respondent ID
-			var ID = _context.Respondents.Order().Last().Id;
+			int ID = _context.Respondents.Order().Last().Id;
 
 			// Add the auth entity
 			Auth auth = new Auth();
@@ -71,7 +71,7 @@ namespace Proyecto_Final.Server.Controllers
 			// Write changes to the DB
 			_context.SaveChanges();
 
-			return new CreatedResult();
+			return Created();
 		}
 
 		[Route("login")]
@@ -228,7 +228,7 @@ namespace Proyecto_Final.Server.Controllers
 
 			_context.SaveChanges();
 
-			return new CreatedResult();
+			return Created();
 		}
 
 		[Route("get-answers")]
