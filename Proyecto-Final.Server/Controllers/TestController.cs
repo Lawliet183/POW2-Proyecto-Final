@@ -75,7 +75,7 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("login")]
 		[HttpPost]
-		public IActionResult LogIn(object user)
+		public string LogIn(object user)
 		{
 			// Parse the JSON
 			string json = user.ToString();
@@ -86,22 +86,25 @@ namespace Proyecto_Final.Server.Controllers
 			//			where (r.Name == jsonObj["name"].ToString() && r.Email == jsonObj["email"].ToString())
 			//			select r.Id).First();
 
-			var q = _context.Respondents
-						.Where(c => c.Name == jsonObj["name"].ToString().Trim() && c.Email == jsonObj["email"].ToString())
-						.ToList();
+			Respondent respondent = _context.Respondents
+												.Where(c => c.Name == jsonObj["name"].ToString().Trim() && c.Email == jsonObj["email"].ToString())
+												.FirstOrDefault();
+
+			Auth? auth = _context.Auths
+							.Where(a => a.RespondentId == respondent.Id && a.PasswordHash == jsonObj["passwordHash"].ToString())
+							.FirstOrDefault();
 
 			//System.FormattableString query = $"SELECT R.Id FROM Respondent as R WHERE R.Name == '{jsonObj["name"].ToString().Trim()}' AND R.Email == '{jsonObj["email"].ToString().Trim()}'";
 
 			//var q = _context.Database.Execute(query);
 
-			if (q.Count <= 0)
+			JObject response = new JObject
 			{
-				return BadRequest();
-			}
-			else
-			{
-				return Ok();
-			}
+				["status"] = (auth is null) ? "error" : "ok",
+				["role"] = (auth is null) ? "null" : auth.Role
+			};
+
+			return response.ToString();
 
 			//if (ID != -1)
 			//{
@@ -174,10 +177,6 @@ namespace Proyecto_Final.Server.Controllers
 
 			JArray jsonArray = JArray.Parse(json);
 
-			//foreach (var item in jsonArray)
-			//{
-			//	Console.WriteLine(item);
-			//}
 			Submission submission = new Submission()
 			{
 				SurveyId = 1
@@ -186,24 +185,8 @@ namespace Proyecto_Final.Server.Controllers
 			_context.Submissions.Add(submission);
 			_context.SaveChanges();
 
-			//var cho = _context.Choices.ToList();
-			//var test = _context.Answers.ToList();
-
-			//List<Answer> answers = new List<Answer>();
-			//int lastQuestionID = -1;
 			foreach (JToken choice in jsonArray)
 			{
-				//int questionId = choice["question_id"].Value<int>();
-
-				//if (lastQuestionID == questionId)
-				//{
-				//	continue;
-				//}
-				//else
-				//{
-				//	lastQuestionID = questionId;
-				//}
-
 				Answer answer = new Answer();
 
 				answer.QuestionId = choice["question_id"].Value<int>();
@@ -224,10 +207,6 @@ namespace Proyecto_Final.Server.Controllers
 						answer.SelectedChoiceId = choice["value"].Value<int>();
 						break;
 					case "checkbox":
-						//answer.Choices = _context.Choices.Where(c => c.QuestionId == questionId).ToList();
-
-						//_context.SaveChanges();
-
 						JArray choicesArray = JArray.FromObject(choice["choices"]);
 
 						List<Choice> choicesList = new List<Choice>();
@@ -237,15 +216,6 @@ namespace Proyecto_Final.Server.Controllers
 						}
 
 						answer.Choices = choicesList;
-
-						//List<Choice> choicesList = new List<Choice>();
-						//foreach (JToken selectedChoice in choicesArray)
-						//{
-						//	choicesList.Add(new Choice()
-						//	{
-
-						//	})
-						//}
 
 						break;
 					default:
@@ -257,7 +227,7 @@ namespace Proyecto_Final.Server.Controllers
 
 			_context.SaveChanges();
 
-			return Ok();
+			return new CreatedResult();
 		}
 	}
 }

@@ -34,15 +34,36 @@ function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
 
     setStatusCode(httpResponse.status);
 
-    if (httpResponse.status == 200) {
-      const isLoggedIn = Cookies.get('isLoggedIn');
+    const data = await httpResponse.json();
 
-      if (!isLoggedIn) {
-        Cookies.set('isLoggedIn', 'true', { expires: 1, sameSite: 'Strict' });
-      }
-
-      onLoginSuccess();
+    if (data.status === "error") {
+      return;
     }
+
+    const isLoggedIn = Cookies.get('isLoggedIn');
+
+    if (!isLoggedIn) {
+      Cookies.set('isLoggedIn', 'true', { expires: 1, sameSite: 'Strict' });
+    }
+
+    if (data.role === "admin") {
+      Cookies.set('role', 'admin', { expires: 1, sameSite: 'Strict' });
+    } else {
+      Cookies.set('role', 'respondent', { expires: 1, sameSite: 'Strict' });
+    }
+
+    onLoginSuccess();
+
+    //if (httpResponse.status === 200) {
+    //  const isLoggedIn = Cookies.get('isLoggedIn');
+
+    //  if (!isLoggedIn) {
+    //    Cookies.set('isLoggedIn', 'true', { expires: 1, sameSite: 'Strict' });
+    //    //Cookies.set('isAdmin', 'false', { expires: 1, sameSite: 'Strict' });
+    //  }
+
+    //  onLoginSuccess();
+    //}
   }
 
   function handleNameChange(e) {
@@ -80,7 +101,7 @@ function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
       <button onClick={handleLogIn}>Iniciar sesión</button>
       <button onClick={handleSignUp}>Registrarse</button>
 
-      { (statusCode == 201 || statusCode == 204)
+      { (statusCode === 201 || statusCode === 204)
         && <p>Registrado exitosamente!</p>
       }
     </div>

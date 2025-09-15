@@ -4,8 +4,9 @@ import Cookies from 'js-cookie';
 import LoginScreen from '@/components/LoginScreen';
 import MainMenuScreen from '@/components/MainMenuScreen';
 import SurveyScreen from '@/components/SurveyScreen';
+import SurveyAnsweredScreen from '@/components/SurveyAnsweredScreen';
 
-import './App.css';
+import '@/App.css';
 
 
 const api = (path, options = {}) =>
@@ -19,7 +20,6 @@ function App() {
 
 
   useEffect(() => {
-    //fetch(`${devServerUrl}/api/ping`);
     const isLoggedIn = Cookies.get('isLoggedIn');
     if (isLoggedIn) {
       setCurrentScreen('main-menu');
@@ -39,6 +39,14 @@ function App() {
     setCurrentScreen('survey');
   }
 
+  function handleAnswersSubmitted() {
+    setCurrentScreen('survey-answered');
+  }
+
+  function handleReturnToMainMenu() {
+    setCurrentScreen('main-menu');
+  }
+
 
   let content;
   switch (currentScreen) {
@@ -51,7 +59,11 @@ function App() {
       break;
     }
     case 'survey': {
-      content = <SurveyScreen api={api} devServerUrl={devServerUrl} />
+      content = <SurveyScreen onAnswersSubmitted={handleAnswersSubmitted} api={api} devServerUrl={devServerUrl} />
+      break;
+    }
+    case 'survey-answered': {
+      content = <SurveyAnsweredScreen onReturnToMainMenu={handleReturnToMainMenu} />
       break;
     }
     default: {
@@ -66,53 +78,6 @@ function App() {
       {content}
     </>
   );
-
-    //const [forecasts, setForecasts] = useState();
-
-    //useEffect(() => {
-    //    populateWeatherData();
-    //}, []);
-
-    //const contents = forecasts === undefined
-    //    ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-    //    : <table className="table table-striped" aria-labelledby="tableLabel">
-    //        <thead>
-    //            <tr>
-    //                <th>Date</th>
-    //                <th>Temp. (C)</th>
-    //                <th>Temp. (F)</th>
-    //                <th>Summary</th>
-    //            </tr>
-    //        </thead>
-    //        <tbody>
-    //            {forecasts.map(forecast =>
-    //                <tr key={forecast.date}>
-    //                    <td>{forecast.date}</td>
-    //                    <td>{forecast.temperatureC}</td>
-    //                    <td>{forecast.temperatureF}</td>
-    //                    <td>{forecast.summary}</td>
-    //                </tr>
-    //            )}
-    //        </tbody>
-    //    </table>;
-
-    //return (
-    //    <div>
-    //        <h1 id="tableLabel">Weather forecast</h1>
-    //        <p>This component demonstrates fetching data from the server.</p>
-    //        {contents}
-    //    </div>
-    //);
-    
-    //async function populateWeatherData() {
-    //    const response = await fetch('test');
-    //    if (response.ok) {
-    //        console.log('Response: ', response);
-
-    //        const data = await response.json();
-    //        setForecasts(data);
-    //    }
-    //}
 }
 
 export default App;

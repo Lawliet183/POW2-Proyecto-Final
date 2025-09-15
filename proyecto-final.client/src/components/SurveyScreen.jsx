@@ -1,30 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
-function SurveyScreen({ api, devServerUrl }) {
+function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
   const [content, setContent] = useState({});
 
 
-  async function handleLoadSurvey() {
-    const response = await api(`${devServerUrl}/api/survey`);
-    const data = await response.json();
-    setContent(data);
+  useEffect(() => {
+    async function fetchSurvey() {
+      const response = await api(`${devServerUrl}/api/survey`);
+      const data = await response.json();
 
-    console.log('Fetch successful');
-  }
+      setContent(data);
+    }
+
+    fetchSurvey();
+  }, []);
+
+
+  //async function handleLoadSurvey() {
+  //  const response = await api(`${devServerUrl}/api/survey`);
+  //  const data = await response.json();
+
+  //  setContent(data);
+  //}
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-
-    //const form = e.target;
-    //const formData = new FormData(form);
-    //const params = new URLSearchParams(formData);
-
-    //const response = await fetch(`${devServerUrl}/api/submit-answers`, {
-    //  method: "POST",
-    //  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //  body: params
-    //});
 
     const form = e.target;
     const payload = [];
@@ -35,8 +36,6 @@ function SurveyScreen({ api, devServerUrl }) {
     Array.from(form.elements)
       .filter(el => el.name)
       .forEach(el => {
-        //if (!el.name) return; // skip elements without a name
-
         const questionId = el.name.substring(2);
 
         if (el.type === "checkbox") {
@@ -62,13 +61,6 @@ function SurveyScreen({ api, devServerUrl }) {
             payload.push({ question_id: questionId, value: el.value, type: el.type });
           }
         }
-
-          //payload.push({
-          //  name: el.name,
-          //  value: el.value,
-          //  type: el.type
-          //});
-        
       });
 
     // Add checkbox groups to payload as "choices"
@@ -87,10 +79,10 @@ function SurveyScreen({ api, devServerUrl }) {
       body: JSON.stringify(payload)
     });
 
-    if (response.status == 200) {
-      console.log('Form handled successfully');
+    if (response.status == 201 || response.status == 204) {
+      onAnswersSubmitted();
     }
-  }
+  } 
 
 
   let form;
@@ -153,16 +145,14 @@ function SurveyScreen({ api, devServerUrl }) {
         {html}
         <button>Enviar respuesta</button>
       </form>
-
-    ////////////////////
-    console.log(content);
+      ;
   }
 
 
   return (
     <div>
-      <p>The survey should be shown here</p>
-      <button onClick={handleLoadSurvey}>Load survey</button>
+      {/*<p>The survey should be shown here</p>*/}
+      {/*<button onClick={handleLoadSurvey}>Load survey</button>*/}
       {form}
     </div>
   );
