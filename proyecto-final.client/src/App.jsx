@@ -5,6 +5,7 @@ import LoginScreen from '@/components/LoginScreen';
 import MainMenuScreen from '@/components/MainMenuScreen';
 import SurveyScreen from '@/components/SurveyScreen';
 import SurveyAnsweredScreen from '@/components/SurveyAnsweredScreen';
+import AnswersScreen from '@/components/AnswersScreen';
 
 import '@/App.css';
 
@@ -47,6 +48,10 @@ function App() {
     setCurrentScreen('main-menu');
   }
 
+  function handleAnswersLoad() {
+    setCurrentScreen('answers');
+  }
+
 
   let content;
   switch (currentScreen) {
@@ -55,7 +60,7 @@ function App() {
       break;
     }
     case 'main-menu': {
-      content = <MainMenuScreen onLogOut={handleLogOut} onSurveyLoad={handleSurveyLoad} />;
+      content = <MainMenuScreen onLogOut={handleLogOut} onSurveyLoad={handleSurveyLoad} onAnswersLoad={handleAnswersLoad} />;
       break;
     }
     case 'survey': {
@@ -64,6 +69,10 @@ function App() {
     }
     case 'survey-answered': {
       content = <SurveyAnsweredScreen onReturnToMainMenu={handleReturnToMainMenu} />
+      break;
+    }
+    case 'answers': {
+      content = <AnswersScreen />
       break;
     }
     default: {

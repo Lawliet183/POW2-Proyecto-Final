@@ -229,5 +229,12 @@ namespace Proyecto_Final.Server.Controllers
 
 			return new CreatedResult();
 		}
+
+		[Route("get-answers")]
+		[HttpGet]
+		public IActionResult GetAnswers()
+		{
+			return Ok();
+		}
 	}
 }

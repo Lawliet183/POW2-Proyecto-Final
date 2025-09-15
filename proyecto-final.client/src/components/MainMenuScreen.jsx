@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 
-function MainMenuScreen({ onLogOut, onSurveyLoad }) {
+function MainMenuScreen({ onLogOut, onSurveyLoad, onAnswersLoad }) {
   function handleLogOut() {
     Cookies.remove('isLoggedIn', { sameSite: 'Strict' });
     Cookies.remove('role', { sameSite: 'Strict' });
@@ -13,10 +13,10 @@ function MainMenuScreen({ onLogOut, onSurveyLoad }) {
   return (
     <div>
       <p>Iniciado sesion exitosamente!</p>
-      <button onClick={() => onSurveyLoad()}>Llenar encuesta</button><br />
+      <button onClick={onSurveyLoad}>Llenar encuesta</button><br />
       <button onClick={handleLogOut}>Cerrar sesion</button>
       {Cookies.get('role') === 'admin' && 
-        <button>Mirar respuestas</button>
+        <button onClick={onAnswersLoad}>Mirar respuestas</button>
       }
     </div>
   );
