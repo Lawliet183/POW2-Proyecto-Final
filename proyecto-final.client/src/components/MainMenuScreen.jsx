@@ -22,4 +22,5 @@ function MainMenuScreen({ onLogOut, onSurveyLoad, onAnswersLoad }) {
   );
 }
 
+
 export default MainMenuScreen;
