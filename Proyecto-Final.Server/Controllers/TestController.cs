@@ -132,10 +132,10 @@ namespace Proyecto_Final.Server.Controllers
 
 			//( (JObject) questionsArray[0] )["Choices"] = JArray.FromObject(choicesArray.Where(x => x["QuestionId"] == questionsArray[0]["Id"]));
 
-			foreach (var question in questionsArray)
+			foreach (JToken question in questionsArray)
 			{
-				var test = choicesArray.Where(x => x["QuestionId"].Value<int>() == question["Id"].Value<int>()).ToList();
-				question["Choices"] = JArray.FromObject(test);
+				List<JToken> actualChoices = choicesArray.Where(x => x["QuestionId"].Value<int>() == question["Id"].Value<int>()).ToList();
+				question["Choices"] = JArray.FromObject(actualChoices);
 			}
 
 			//JObject finalObject = new JObject([surveyJson, questionsJson, choicesJson]);
@@ -144,7 +144,7 @@ namespace Proyecto_Final.Server.Controllers
 
 			//string finalJson = JsonConvert.SerializeObject(finalObject);
 
-			
+
 
 			JObject finalObject = new JObject
 			{
@@ -168,12 +168,94 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("submit-answers")]
 		[HttpPost]
-		public IActionResult SubmitAnswers([FromForm] IFormCollection form)
+		public IActionResult SubmitAnswers(object form)
 		{
-			//foreach (var item in form)
+			string json = form.ToString();
+
+			JArray jsonArray = JArray.Parse(json);
+
+			//foreach (var item in jsonArray)
 			//{
 			//	Console.WriteLine(item);
 			//}
+			Submission submission = new Submission()
+			{
+				SurveyId = 1
+			};
+
+			_context.Submissions.Add(submission);
+			_context.SaveChanges();
+
+			//var cho = _context.Choices.ToList();
+			//var test = _context.Answers.ToList();
+
+			//List<Answer> answers = new List<Answer>();
+			//int lastQuestionID = -1;
+			foreach (JToken choice in jsonArray)
+			{
+				//int questionId = choice["question_id"].Value<int>();
+
+				//if (lastQuestionID == questionId)
+				//{
+				//	continue;
+				//}
+				//else
+				//{
+				//	lastQuestionID = questionId;
+				//}
+
+				Answer answer = new Answer();
+
+				answer.QuestionId = choice["question_id"].Value<int>();
+				answer.SubmissionId = _context.Submissions.Where(s => s.SurveyId == 1).Order().LastOrDefault().Id;
+
+				switch (choice["type"].ToString())
+				{
+					case "text":
+						answer.AnswerText = choice["value"].ToString();
+						break;
+					case "number":
+						answer.AnswerNumber = choice["value"].Value<float>();
+						break;
+					case "date":
+						answer.AnswerDate = choice["value"].Value<DateTime>();
+						break;
+					case "radio":
+						answer.SelectedChoiceId = choice["value"].Value<int>();
+						break;
+					case "checkbox":
+						//answer.Choices = _context.Choices.Where(c => c.QuestionId == questionId).ToList();
+
+						//_context.SaveChanges();
+
+						JArray choicesArray = JArray.FromObject(choice["choices"]);
+
+						List<Choice> choicesList = new List<Choice>();
+						foreach (JToken selectedChoice in choicesArray)
+						{
+							choicesList.Add(_context.Choices.Where(c => c.Id == selectedChoice.Value<int>()).FirstOrDefault());
+						}
+
+						answer.Choices = choicesList;
+
+						//List<Choice> choicesList = new List<Choice>();
+						//foreach (JToken selectedChoice in choicesArray)
+						//{
+						//	choicesList.Add(new Choice()
+						//	{
+
+						//	})
+						//}
+
+						break;
+					default:
+						break;
+				}
+
+				_context.Answers.Add(answer);
+			}
+
+			_context.SaveChanges();
 
 			return Ok();
 		}

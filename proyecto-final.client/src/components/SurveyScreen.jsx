@@ -16,18 +16,79 @@ function SurveyScreen({ api, devServerUrl }) {
   async function handleFormSubmit(e) {
     e.preventDefault();
 
+    //const form = e.target;
+    //const formData = new FormData(form);
+    //const params = new URLSearchParams(formData);
+
+    //const response = await fetch(`${devServerUrl}/api/submit-answers`, {
+    //  method: "POST",
+    //  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    //  body: params
+    //});
+
     const form = e.target;
-    const formData = new FormData(form);
-    const params = new URLSearchParams(formData);
+    const payload = [];
+
+    // Group checkboxes by name so we can collect all selected values
+    const checkboxesByName = {};
+
+    Array.from(form.elements)
+      .filter(el => el.name)
+      .forEach(el => {
+        //if (!el.name) return; // skip elements without a name
+
+        const questionId = el.name.substring(2);
+
+        if (el.type === "checkbox") {
+          if (!checkboxesByName[questionId]) {
+            checkboxesByName[questionId] = [];
+          }
+          if (el.checked) {
+            checkboxesByName[questionId].push(el.value);
+          }
+
+        } else if (el.type === 'text') {
+          payload.push({ question_id: questionId, value: el.value, type: el.type });
+        } else if (el.type === 'number') {
+          payload.push({ question_id: questionId, value: (el.value === '' ? null : el.value), type: el.type });
+        } else if (el.type === 'date') {
+          payload.push({ question_id: questionId, value: el.value, type: el.type });
+        } else if (el.type === 'radio') {
+          if (el.checked) {
+            payload.push({ question_id: questionId, value: el.value, type: el.type });
+          }
+        } else if (el.type === 'checkbox') {
+          if (el.checked) {
+            payload.push({ question_id: questionId, value: el.value, type: el.type });
+          }
+        }
+
+          //payload.push({
+          //  name: el.name,
+          //  value: el.value,
+          //  type: el.type
+          //});
+        
+      });
+
+    // Add checkbox groups to payload as "choices"
+    for (const [questionId, choices] of Object.entries(checkboxesByName)) {
+      payload.push({
+        question_id: questionId,
+        choices: choices,
+        type: "checkbox"
+      });
+    }
+
 
     const response = await fetch(`${devServerUrl}/api/submit-answers`, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
 
     if (response.status == 200) {
-      console.log('sent successfully');
+      console.log('Form handled successfully');
     }
   }
 
