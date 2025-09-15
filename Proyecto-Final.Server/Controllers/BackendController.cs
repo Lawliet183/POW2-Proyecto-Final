@@ -9,19 +9,20 @@ using Devart.Common;
 using Devart.Data.MySql.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.WebUtilities;
+using Proyecto_Final.Server.Models;
 
 namespace Proyecto_Final.Server.Controllers
 {
 	[ApiController]
 	[Route("/api")]
-	public class TestController : ControllerBase
+	public class BackendController : ControllerBase
 	{
-		public readonly ILogger<TestController> _logger;
+		public readonly ILogger<BackendController> _logger;
 
 		public readonly ProyectoEncuestaContext _context;
 
 
-		public TestController(ILogger<TestController> logger)
+		public BackendController(ILogger<BackendController> logger)
 		{
 			_logger = logger;
 

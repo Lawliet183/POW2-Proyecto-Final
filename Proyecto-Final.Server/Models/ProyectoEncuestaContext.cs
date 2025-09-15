@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Proyecto_Final.Server;
+namespace Proyecto_Final.Server.Models;
 
 public partial class ProyectoEncuestaContext : DbContext
 {
