@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 
 function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
@@ -38,7 +39,7 @@ function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
       .forEach(el => {
         const questionId = el.name.substring(2);
 
-        if (el.type === "checkbox") {
+        if (el.type === 'checkbox') {
           if (!checkboxesByName[questionId]) {
             checkboxesByName[questionId] = [];
           }
@@ -56,11 +57,12 @@ function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
           if (el.checked) {
             payload.push({ question_id: questionId, value: el.value, type: el.type });
           }
-        } else if (el.type === 'checkbox') {
-          if (el.checked) {
-            payload.push({ question_id: questionId, value: el.value, type: el.type });
-          }
         }
+        //else if (el.type === 'checkbox') {
+        //  if (el.checked) {
+        //    payload.push({ question_id: questionId, value: el.value, type: el.type });
+        //  }
+        //}
       });
 
     // Add checkbox groups to payload as "choices"
@@ -72,11 +74,21 @@ function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
       });
     }
 
+    console.log(payload);
+    console.log(payload[0].question_id);
+
+    payload.sort((a, b) => a.question_id - b.question_id);
+
+    const body = {
+      user_id: Cookies.get('userID'),
+      form: payload
+    }
+
 
     const response = await fetch(`${devServerUrl}/api/submit-answers`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(body)
     });
 
     if (response.status == 201 || response.status == 204) {

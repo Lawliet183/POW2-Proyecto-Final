@@ -10,6 +10,7 @@ using Devart.Data.MySql.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.WebUtilities;
 using Proyecto_Final.Server.Models;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 
 namespace Proyecto_Final.Server.Controllers
 {
@@ -102,6 +103,7 @@ namespace Proyecto_Final.Server.Controllers
 			JObject response = new JObject
 			{
 				["status"] = (auth is null) ? "error" : "ok",
+				["user_id"] = (auth is null) ? "null" : auth.RespondentId,
 				["role"] = (auth is null) ? "null" : auth.Role
 			};
 
@@ -176,15 +178,19 @@ namespace Proyecto_Final.Server.Controllers
 		{
 			string json = form.ToString();
 
-			JArray jsonArray = JArray.Parse(json);
+			JObject jsonObj = JObject.Parse(json);
 
 			Submission submission = new Submission()
 			{
-				SurveyId = 1
+				SurveyId = 1,
+				RespondentId = jsonObj["user_id"].Value<int>()
 			};
 
 			_context.Submissions.Add(submission);
 			_context.SaveChanges();
+
+			//JArray jsonArray = JArray.Parse(json);
+			JArray jsonArray = JArray.FromObject(jsonObj["form"]);
 
 			foreach (JToken choice in jsonArray)
 			{
@@ -233,9 +239,107 @@ namespace Proyecto_Final.Server.Controllers
 
 		[Route("get-answers")]
 		[HttpGet]
-		public IActionResult GetAnswers()
+		public string GetAnswers()
 		{
-			return Ok();
+
+			var nonAnonymousRespondents = _context.Respondents.Join(
+				_context.Submissions,
+				r => r.Id,
+				s => s.RespondentId,
+				(r, s) => new { s.Id, s.RespondentId, r.Name, r.Email }
+			).ToList();
+
+			var allAnswersNoMulti = _context.Submissions.Join(
+				_context.Answers,
+				s => s.Id,
+				a => a.SubmissionId,
+				(s, a) => new { s, a }
+			).Join(
+				_context.Questions,
+				temp => temp.a.QuestionId,
+				q => q.Id,
+				(temp, q) => new {
+					temp.s.Id,
+					temp.s.RespondentId,
+					temp.a.QuestionId,
+					temp.a.AnswerText,
+					temp.a.AnswerNumber,
+					temp.a.AnswerDate,
+					temp.a.SelectedChoiceId,
+					temp.a.Choices,
+					q.Type
+				}
+			).ToList();
+
+			var singleChoiceAnswers = _context.Answers.Join(
+				_context.Choices,
+				a => a.SelectedChoiceId,
+				c => c.Id,
+				(a, c) => new { a.SubmissionId, a.QuestionId, a.SelectedChoiceId, c.Label }
+			).ToList();
+
+			//var multipleChoiceAnswers = _context.
+
+			//var questions = _context.Questions.ToList();
+			//var answers = _context.Answers.ToList();
+
+			var submissions = _context.Submissions.ToList();
+
+			List<JObject> responseItems = new List<JObject>();
+			foreach (var submission in submissions)
+			{
+				var questions = allAnswersNoMulti.FindAll(a => a.Id == submission.Id);
+
+				List<JObject> questionItems = new List<JObject>();
+				foreach (var question in questions)
+				{
+					JObject obj = new JObject
+					{
+						["question_id"] = question.QuestionId,
+						["type"] = question.Type
+					};
+
+					JArray choicesArray = new JArray();
+					if (question.Type == "multi")
+					{
+						var choicesList = question.Choices.ToList();
+
+						foreach(var choice in choicesList)
+						{
+							choicesArray.Add(choice.Label);
+						}
+					}
+
+					JProperty property = question.Type switch
+					{
+						"text" => new JProperty("value", question.AnswerText),
+						"number" => new JProperty("value", question.AnswerNumber),
+						"date" => new JProperty("value", question.AnswerDate),
+						"single" => new JProperty("value", singleChoiceAnswers.Find(c => c.SelectedChoiceId == question.SelectedChoiceId)?.Label),
+						"multi" => new JProperty("choices", choicesArray),
+						_ => new JProperty("value", "")
+					};
+
+					obj.Add(property);
+
+					questionItems.Add(obj);
+				}
+
+				JArray questionsArray = JArray.FromObject(questionItems);
+
+				var respondent = nonAnonymousRespondents.Find(r => r.RespondentId == submission.RespondentId);
+
+				responseItems.Add(new JObject
+				{
+					["submission_id"] = submission.Id,
+					["respondent_id"] = submission.RespondentId,
+					["respondent_name"] = respondent?.Name,
+					["respondent_email"] = respondent?.Email,
+					["questions"] = questionsArray
+				});
+			}
+
+			return JsonConvert.SerializeObject(responseItems);
 		}
 	}
 }

@@ -44,6 +44,7 @@ function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
 
     if (!isLoggedIn) {
       Cookies.set('isLoggedIn', 'true', { expires: 1, sameSite: 'Strict' });
+      Cookies.set('userID', data.user_id, { expires: 1, sameSite: 'Strict' });
     }
 
     if (data.role === "admin") {

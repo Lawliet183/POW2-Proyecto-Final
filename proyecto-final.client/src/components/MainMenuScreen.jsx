@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 function MainMenuScreen({ onLogOut, onSurveyLoad, onAnswersLoad }) {
   function handleLogOut() {
     Cookies.remove('isLoggedIn', { sameSite: 'Strict' });
+    Cookies.remove('userID', { sameSite: 'Strict' });
     Cookies.remove('role', { sameSite: 'Strict' });
 
     onLogOut();

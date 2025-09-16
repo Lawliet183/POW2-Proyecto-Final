@@ -1,9 +1,61 @@
-function AnswersScreen() {
+import { useState, useEffect } from 'react';
+
+
+function AnswersScreen({ onReturnToMainMenu, api, devServerUrl }) {
+  const [data, setData] = useState([]);
+
+
+  useEffect(() => {
+    async function fetchAnswers() {
+      const response = await api(`${devServerUrl}/api/get-answers`);
+      const json = await response.json();
+
+      setData(json);
+    }
+
+    fetchAnswers();
+  }, []);
+
+
+  const tableRows = data.map(survey => {
+    const respondentData =
+      <>
+        <td>{survey.respondent_id || '?'}</td>
+        <td>{survey.respondent_name || 'Anonimo'}</td>
+        <td>{survey.respondent_email || 'Anonimo'}</td>
+      </>
+      ;
+
+    const questions = survey.questions.slice();
+
+    questions.sort((a, b) => a.question_id - b.question_id);
+
+    const answers = questions.map(q => {
+      if (q.type === "multi") {
+        return (
+          <td>{q.choices.join('; ')}</td>
+        );
+      } else {
+        return (
+          <td>{q.value}</td>
+        );
+      }
+    });
+
+    return (
+      <tr>
+        {respondentData}
+        {answers}
+      </tr>
+    )
+  });
+
+
   const table =
     <table border="1" cellpadding="5" cellspacing="0">
       <thead>
         <tr>
-          <th>#</th>
+          <th>ID</th>
           <th>Nombre</th>
           <th>Email</th>
           <th>Pregunta 1</th>
@@ -18,34 +70,7 @@ function AnswersScreen() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>user1</td>
-          <td>user1@example.com</td>
-          <td>Answer 1</td>
-          <td>Answer 2</td>
-          <td>Answer 3</td>
-          <td>Answer 4</td>
-          <td>Answer 5</td>
-          <td>Answer 6</td>
-          <td>Answer 7</td>
-          <td>Answer 8</td>
-          <td>Answer 9</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>user2</td>
-          <td>user2@example.com</td>
-          <td>Answer 1</td>
-          <td>Answer 2</td>
-          <td>Answer 3</td>
-          <td>Answer 4</td>
-          <td>Answer 5</td>
-          <td>Answer 6</td>
-          <td>Answer 7</td>
-          <td>Answer 8</td>
-          <td>Answer 9</td>
-        </tr>
+        {tableRows}
       </tbody>
     </table>
     ;
@@ -54,6 +79,7 @@ function AnswersScreen() {
   return (
     <div>
       {table}
+      <button onClick={onReturnToMainMenu}>Regresar al menu principal</button>
     </div>
   );
 }

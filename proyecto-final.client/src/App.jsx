@@ -72,7 +72,7 @@ function App() {
       break;
     }
     case 'answers': {
-      content = <AnswersScreen />
+      content = <AnswersScreen onReturnToMainMenu={handleReturnToMainMenu} api={api} devServerUrl={devServerUrl} />
       break;
     }
     default: {
