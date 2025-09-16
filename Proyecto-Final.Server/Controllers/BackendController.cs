@@ -28,6 +28,8 @@ namespace Proyecto_Final.Server.Controllers
 			_logger = logger;
 
 			_context = new ProyectoEncuestaContext();
+
+			_context.Database.CanConnect();
 		}
 
 

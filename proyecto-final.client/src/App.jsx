@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
+import LoadingScreen from '@/components/LoadingScreen';
 import LoginScreen from '@/components/LoginScreen';
 import MainMenuScreen from '@/components/MainMenuScreen';
 import SurveyScreen from '@/components/SurveyScreen';
@@ -17,14 +18,22 @@ const devServerUrl = import.meta.env.VITE_DEV_SERVER_URL;
 
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState('login');
+  const [currentScreen, setCurrentScreen] = useState('loading');
 
 
   useEffect(() => {
-    const isLoggedIn = Cookies.get('isLoggedIn');
-    if (isLoggedIn) {
-      setCurrentScreen('main-menu');
+    async function initialPing() {
+      await api(`${devServerUrl}/api/ping`);
+
+      const isLoggedIn = Cookies.get('isLoggedIn');
+      if (isLoggedIn) {
+        setCurrentScreen('main-menu');
+      } else {
+        setCurrentScreen('login');
+      }
     }
+
+    initialPing();
   }, []);
 
 
@@ -55,6 +64,10 @@ function App() {
 
   let content;
   switch (currentScreen) {
+    case 'loading': {
+      content = <LoadingScreen />
+      break;
+    }
     case 'login': {
       content = <LoginScreen onLoginSuccess={handleLoginSuccess} api={api} devServerUrl={devServerUrl} />;
       break;
