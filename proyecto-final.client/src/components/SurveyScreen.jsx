@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
 
-function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
+function SurveyScreen({ onAnswersSubmitted, onReturnToMainMenu, api, devServerUrl }) {
   const [content, setContent] = useState({});
 
 
@@ -164,6 +164,7 @@ function SurveyScreen({ onAnswersSubmitted, api, devServerUrl }) {
   return (
     <div>
       {form}
+      <button onClick={onReturnToMainMenu}>Regresar al menu principal</button>
     </div>
   );
 }

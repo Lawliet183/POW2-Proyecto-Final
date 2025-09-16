@@ -77,7 +77,7 @@ function App() {
       break;
     }
     case 'survey': {
-      content = <SurveyScreen onAnswersSubmitted={handleAnswersSubmitted} api={api} devServerUrl={devServerUrl} />
+      content = <SurveyScreen onAnswersSubmitted={handleAnswersSubmitted} onReturnToMainMenu={handleReturnToMainMenu} api={api} devServerUrl={devServerUrl} />
       break;
     }
     case 'survey-answered': {
