@@ -33,17 +33,17 @@ function AnswersScreen({ onReturnToMainMenu, api, devServerUrl }) {
     const answers = questions.map(q => {
       if (q.type === "multi") {
         return (
-          <td>{q.choices.join('; ')}</td>
+          <td key={q.question_id}>{q.choices.join('; ')}</td>
         );
       } else {
         return (
-          <td>{q.value}</td>
+          <td key={q.question_id}>{q.value}</td>
         );
       }
     });
 
     return (
-      <tr>
+      <tr key={survey.respondent_id}>
         {respondentData}
         {answers}
       </tr>
@@ -52,7 +52,7 @@ function AnswersScreen({ onReturnToMainMenu, api, devServerUrl }) {
 
 
   const table =
-    <table border="1" cellpadding="5" cellspacing="0">
+    <table border="1" cellPadding="5" cellSpacing="0">
       <thead>
         <tr>
           <th>ID</th>
