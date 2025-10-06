@@ -105,7 +105,7 @@ function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
 
         <p>Status code: {statusCode}</p>
 
-        <Button $primary onClick={handleLogIn}>Iniciar sesión</Button><br />
+        <Button $primary onClick={handleLogIn}>Iniciar sesión</Button>
         <Button onClick={handleSignUp}>Registrarse</Button>
 
         {(statusCode === 201 || statusCode === 204)
@@ -140,6 +140,7 @@ const Button = styled.button`
   display: flex;
   flex: auto;
   justify-content: center;
+  margin: 0.5em 0;
 
 
 

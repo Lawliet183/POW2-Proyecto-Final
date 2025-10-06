@@ -1,14 +1,32 @@
-import loadingIcon from '@/assets/loader.svg';
+import { keyframes, styled } from 'styled-components';
 
-import '@/components/LoadingScreen.css';
+import loadingIcon from '@/assets/loader.svg';
 
 
 function LoadingScreen() {
   return (
-    <div className="loader">
+    <Loader>
       <img src={loadingIcon} />
-    </div>
+    </Loader>
   );
 }
+
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const Loader = styled.div`
+  height: 5rem;
+  width: 5rem;
+  margin: auto;
+  animation: ${spin} 2s infinite linear;
+`;
+
 
 export default LoadingScreen;
