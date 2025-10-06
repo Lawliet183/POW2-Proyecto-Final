@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
 import Cookies from 'js-cookie';
+import { styled } from 'styled-components';
 
 function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
   const [statusCode, setStatusCode] = useState(0);
@@ -82,32 +83,71 @@ function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
 
   return (
     <div>
-      <div>
-        <label>Nombre</label><br />
-        <input type="text" onChange={handleNameChange} />
-      </div>
+      <Card>
+        <div>
+          <h1>Iniciar sesión</h1>
+        </div>
 
-      <div>
-        <label>Correo</label><br />
-        <input type="email" onChange={handleEmailChange} />
-      </div>
+        <div>
+          <label>Nombre</label><br />
+          <input type="text" onChange={handleNameChange} />
+        </div>
 
-      <div>
-        <label>Contraseña</label><br />
-        <input type="password" onChange={handlePasswordHashChange} />
-      </div>
+        <div>
+          <label>Correo</label><br />
+          <input type="email" onChange={handleEmailChange} />
+        </div>
 
-      <p>Status code: {statusCode}</p>
+        <div>
+          <label>Contraseña</label><br />
+          <input type="password" onChange={handlePasswordHashChange} />
+        </div>
 
-      <button onClick={handleLogIn}>Iniciar sesión</button>
-      <button onClick={handleSignUp}>Registrarse</button>
+        <p>Status code: {statusCode}</p>
 
-      { (statusCode === 201 || statusCode === 204)
-        && <p>Registrado exitosamente!</p>
-      }
+        <Button $primary onClick={handleLogIn}>Iniciar sesión</Button><br />
+        <Button onClick={handleSignUp}>Registrarse</Button>
+
+        {(statusCode === 201 || statusCode === 204)
+          && <p>Registrado exitosamente!</p>
+        }
+      </Card>
     </div>
   );
 }
+
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background: #444;
+  color: white;
+  padding: 1em;
+
+  @media (prefers-color-scheme: light) {
+    background: #ddd;
+    color: #333;
+  }
+`;
+
+
+const Button = styled.button`
+  border-radius: 0px;
+  border: 1px solid;
+  background: ${props => props.$primary ? "#eee" : "transparent"};
+  color: ${props => props.$primary && "#111"};
+  display: flex;
+  flex: auto;
+  justify-content: center;
+
+
+
+  @media (prefers-color-scheme: light) {
+    background: ${props => props.$primary ? "#111" : "transparent"};
+    color: ${props => props.$primary && "#eee"};
+  }
+`;
 
 
 export default LoginScreen;
