@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Reflection.Metadata.Ecma335;
+using Newtonsoft.Json.Linq;
+using Proyecto_Final.Server;
 using System.Net;
 using System.Net.Http.Headers;
-using Devart.Common;
-using Devart.Data.MySql.Entity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.WebUtilities;
-using Proyecto_Final.Server.Models;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Proyecto_Final.Server.Controllers
 {

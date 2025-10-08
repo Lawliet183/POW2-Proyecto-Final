@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Proyecto_Final.Server.Models;
+namespace Proyecto_Final.Server;
 
 public partial class Choice
 {
     public int Id { get; set; }
 
-    public string? Label { get; set; }
+    public int? QuestionId { get; set; }
 
     public int? Position { get; set; }
 
-    public int? QuestionId { get; set; }
+    public string? Label { get; set; }
 
     public string? Value { get; set; }
 

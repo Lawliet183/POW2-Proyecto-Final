@@ -7,6 +7,8 @@ import MainMenuScreen from '@/components/MainMenuScreen';
 import SurveyScreen from '@/components/SurveyScreen';
 import SurveyAnsweredScreen from '@/components/SurveyAnsweredScreen';
 import AnswersScreen from '@/components/AnswersScreen';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 import '@/App.css';
 
@@ -97,7 +99,9 @@ function App() {
 
   return (
     <>
+      <Header title={currentScreen} />
       {content}
+      <Footer year={2025} />
     </>
   );
 }
