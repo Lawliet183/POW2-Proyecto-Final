@@ -103,8 +103,6 @@ function LoginScreen({ onLoginSuccess, api, devServerUrl }) {
           <input type="password" onChange={handlePasswordHashChange} />
         </div>
 
-        <p>Status code: {statusCode}</p>
-
         <Button $primary onClick={handleLogIn}>Iniciar sesión</Button>
         <Button onClick={handleSignUp}>Registrarse</Button>
 

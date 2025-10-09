@@ -10,17 +10,6 @@
     <SpaProxyServerUrl>https://localhost:57565</SpaProxyServerUrl>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Devart.Data.MySql.key" />
-  </ItemGroup>
-
-	<ItemGroup>
-		<Content Include="Devart.Data.MySql.key">
-			<LogicalName>Devart.Data.MySql.key</LogicalName>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
 
 	<ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">

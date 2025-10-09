@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { styled } from 'styled-components';
 
 import LoadingScreen from '@/components/LoadingScreen';
 import LoginScreen from '@/components/LoginScreen';
@@ -65,33 +66,41 @@ function App() {
 
 
   let content;
+  let title;
   switch (currentScreen) {
     case 'loading': {
       content = <LoadingScreen />
+      title = 'Cargando';
       break;
     }
     case 'login': {
       content = <LoginScreen onLoginSuccess={handleLoginSuccess} api={api} devServerUrl={devServerUrl} />;
+      title = 'Login';
       break;
     }
     case 'main-menu': {
       content = <MainMenuScreen onLogOut={handleLogOut} onSurveyLoad={handleSurveyLoad} onAnswersLoad={handleAnswersLoad} />;
+      title = 'Menu Principal';
       break;
     }
     case 'survey': {
       content = <SurveyScreen onAnswersSubmitted={handleAnswersSubmitted} onReturnToMainMenu={handleReturnToMainMenu} api={api} devServerUrl={devServerUrl} />
+      title = 'Encuesta';
       break;
     }
     case 'survey-answered': {
       content = <SurveyAnsweredScreen onReturnToMainMenu={handleReturnToMainMenu} />
+      title = 'Encuesta';
       break;
     }
     case 'answers': {
       content = <AnswersScreen onReturnToMainMenu={handleReturnToMainMenu} api={api} devServerUrl={devServerUrl} />
+      title = 'Respuestas';
       break;
     }
     default: {
       content = null;
+      title = '?';
       break;
     }
   }
@@ -99,7 +108,7 @@ function App() {
 
   return (
     <>
-      <Header title={currentScreen} />
+      <Header title={title} />
       {content}
       <Footer year={2025} />
     </>
