@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { styled } from 'styled-components';
 
 import LoadingScreen from '@/components/LoadingScreen';
 import LoginScreen from '@/components/LoginScreen';
