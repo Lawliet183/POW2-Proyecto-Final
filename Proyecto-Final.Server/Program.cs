@@ -17,8 +17,8 @@ builder.Services.AddCors(options =>
 
 /* Configuracion de Pomelo Entity Framework */
 
-// Replace with your connection string.
-var connectionString = "server=localhost;user=root;password=query_sql;database=proyecto_encuesta";
+// Read connection string from appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Replace with your server version and type.
 // Use 'MariaDbServerVersion' for MariaDB.

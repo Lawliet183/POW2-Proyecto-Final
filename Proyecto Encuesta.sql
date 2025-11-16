@@ -255,3 +255,25 @@ INSERT INTO Choices (Question_ID, Position, Label, Value) VALUES
 -- select * from Answers;
 -- select * from Answers_Choices;
 -- select * from Submissions;
+
+-- Get all the non-anonymous respondents
+select s.Id as Submission_ID, s.Respondent_ID, r.Name, r.Email from respondents as r inner join submissions as s on r.Id = s.Respondent_ID;
+
+-- Get text, number, and date answers
+select s.Id as Submission_ID, s.Respondent_ID, a.Question_ID, a.Answer_text, a.Answer_number, a.Answer_date, a.Selected_Choice_ID, q.Type
+from submissions as s
+inner join answers as a on s.ID = a.Submission_ID
+inner join questions as q on a.Question_ID = q.Id
+order by Submission_ID asc, a.Question_ID asc;
+
+-- Get single choice answers
+select a.Submission_ID, a.Question_ID, a.Selected_Choice_ID, c.Label
+from answers as a
+inner join choices as c on a.Selected_Choice_ID = c.ID;
+
+-- Get multiple choice answers
+select a.Submission_ID, a.Question_ID, c.Label
+from answers_choices as a_c 
+inner join choices as c on a_c.Choice_ID = c.Id 
+inner join answers as a on a_c.Answer_ID = a.Id
+order by a.Submission_ID asc;

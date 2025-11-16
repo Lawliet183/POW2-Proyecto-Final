@@ -21,11 +21,13 @@ namespace Proyecto_Final.Server.Controllers
 		public readonly ProyectoEncuestaContext _context;
 
 
-		public BackendController(ILogger<BackendController> logger)
+		public BackendController(ILogger<BackendController> logger, ProyectoEncuestaContext context)
 		{
 			_logger = logger;
 
-			_context = new ProyectoEncuestaContext();
+			//_context = new ProyectoEncuestaContext();
+
+			_context = context;
 
 			_context.Database.CanConnect();
 		}
