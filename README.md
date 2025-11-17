@@ -1,11 +1,11 @@
 # Proyecto Final POW2
 
-Aplicaci車n web desarrollada con **.NET (C#)** en el backend y **React** en el frontend.  
+Aplicacion web desarrollada con **.NET (C#)** en el backend y **React** en el frontend.  
 El backend utiliza **Entity Framework Core** con el proveedor **Pomelo.EntityFrameworkCore.MySql** para conectarse a una base de datos **MySQL**.
 
 ---
 
-## ?? Requisitos previos
+## Requisitos previos
 
 - **Sistema operativo:** Windows 10/11 (recomendado)  
 - **IDE:** Visual Studio 2022 con la carga de trabajo ASP.NET y desarrollo web  
@@ -16,7 +16,7 @@ El backend utiliza **Entity Framework Core** con el proveedor **Pomelo.EntityFra
 
 ---
 
-## ?? Instalaci車n
+## Instalacion
 
 ### 1. Clonar el repositorio
 ```bash
@@ -26,9 +26,9 @@ cd POW2-Proyecto-Final
 
 ---
 
-### 2. Configuraci車n del Backend (Proyecto-Final.Server)
+### 2. Configuracion del Backend (Proyecto-Final.Server)
 
-- Abrir la soluci車n en Visual Studio:
+- Abrir la solucion en Visual Studio:
   - **Proyecto-Final.sln**
 - Establecer **Proyecto-Final.Server** como proyecto de inicio.
 
@@ -37,7 +37,7 @@ cd POW2-Proyecto-Final
 dotnet restore
 ```
 
-- Configurar la cadena de conexi車n en `appsettings.json`:
+- Configurar la cadena de conexion en `appsettings.json`:
 ```json
 "ConnectionStrings": {
   "DefaultConnection": "Server=localhost;Database=proyecto_encuesta;User=root;Password=tu_password;"
@@ -59,7 +59,7 @@ El backend quedar芍 disponible en `https://localhost:7268` o `http://localhost:5
 
 ---
 
-### 3. Configuraci車n del Frontend (proyecto-final.client)
+### 3. Configuracion del Frontend (proyecto-final.client)
 
 - Instalar dependencias:
 ```bash
@@ -79,13 +79,13 @@ npm start
 
 El frontend quedar芍 disponible en `https://localhost:57565/`.
 
-## ? Verificaci車n
+## Verificacion
 
 - Abre `https://localhost:57565/` en tu navegador.  
 - El cliente React debe conectarse al backend en `https://localhost:7268`.  
-- Prueba las funcionalidades b芍sicas para confirmar la conexi車n con la base de datos MySQL.
+- Prueba las funcionalidades b芍sicas para confirmar la conexion con la base de datos MySQL.
 
-## ?? Usuarios preexistentes en la base de datos
+## Usuarios preexistentes en la base de datos
 
 ### Administrador
 - **Usuario:** Liam  
@@ -99,16 +99,16 @@ El frontend quedar芍 disponible en `https://localhost:57565/`.
 
 ---
 
-## ?? Problemas comunes
+## Problemas comunes
 
-- **Error de conexi車n a MySQL** ↙ Revisa la cadena de conexi車n en `appsettings.json`.  
+- **Error de conexion a MySQL** ↙ Revisa la cadena de conexion en `appsettings.json`.  
 - **Migraciones no aplicadas** ↙ Ejecuta `dotnet ef database update`.  
 - **CORS bloquea el frontend** ↙ Configura `UseCors` en `Program.cs` permitiendo `https://localhost:57565/`.  
 - **Certificado HTTPS en desarrollo falla** ↙ Si ocurre, usa `http://localhost:5192` en lugar de `https://localhost:7268`.
 
 ---
 
-## ??? Tecnolog赤as utilizadas
+##? Tecnolog赤as utilizadas
 
 - **Backend:** .NET 6, Entity Framework Core, Pomelo MySQL Provider  
 - **Frontend:** React, JavaScript, CSS  
