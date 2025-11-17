@@ -54,6 +54,7 @@ dotnet ef database update
 - Ejecutar el servidor:
 ```bash
 dotnet run
+```
 
 El backend quedar¨¢ disponible en `https://localhost:7268` o `http://localhost:5192`.
 
