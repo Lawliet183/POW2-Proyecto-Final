@@ -44,7 +44,7 @@ dotnet restore
 }
 ```
 
-- Ajusta **Server**, **Database**, **User** y **Password** seg¨²n tu entorno MySQL.
+- Ajusta **Server**, **Database**, **User** y **Password** segun tu entorno MySQL.
 
 - Aplicar migraciones de Entity Framework Core:
 ```bash
@@ -56,7 +56,7 @@ dotnet ef database update
 dotnet run
 ```
 
-El backend quedar¨¢ disponible en `https://localhost:7268` o `http://localhost:5192`.
+El backend quedara disponible en `https://localhost:7268` o `http://localhost:5192`.
 
 ---
 
@@ -78,13 +78,13 @@ VITE_DEV_SERVER_URL="https://localhost:7268"
 npm start
 ```
 
-El frontend quedar¨¢ disponible en `https://localhost:57565/`.
+El frontend quedara disponible en `https://localhost:57565/`.
 
 ## Verificacion
 
 - Abre `https://localhost:57565/` en tu navegador.  
 - El cliente React debe conectarse al backend en `https://localhost:7268`.  
-- Prueba las funcionalidades b¨¢sicas para confirmar la conexion con la base de datos MySQL.
+- Prueba las funcionalidades basicas para confirmar la conexion con la base de datos MySQL.
 
 ## Usuarios preexistentes en la base de datos
 
@@ -102,10 +102,10 @@ El frontend quedar¨¢ disponible en `https://localhost:57565/`.
 
 ## Problemas comunes
 
-- **Error de conexion a MySQL** ¡ú Revisa la cadena de conexion en `appsettings.json`.  
-- **Migraciones no aplicadas** ¡ú Ejecuta `dotnet ef database update`.  
-- **CORS bloquea el frontend** ¡ú Configura `UseCors` en `Program.cs` permitiendo `https://localhost:57565/`.  
-- **Certificado HTTPS en desarrollo falla** ¡ú Si ocurre, usa `http://localhost:5192` en lugar de `https://localhost:7268`.
+- **Error de conexion a MySQL** --> Revisa la cadena de conexion en `appsettings.json`.  
+- **Migraciones no aplicadas** --> Ejecuta `dotnet ef database update`.  
+- **CORS bloquea el frontend** --> Configura `UseCors` en `Program.cs` permitiendo `https://localhost:57565/`.  
+- **Certificado HTTPS en desarrollo falla** --> Si ocurre, usa `http://localhost:5192` en lugar de `https://localhost:7268`.
 
 ---
 
