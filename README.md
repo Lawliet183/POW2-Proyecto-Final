@@ -91,12 +91,12 @@ El frontend quedara disponible en `https://localhost:57565/`.
 ### Administrador
 - **Usuario:** Liam  
 - **Correo:** liam@gmail.com  
-- **Contrase?a:** 123qwe  
+- **Contraseña:** 123qwe  
 
 ### Usuario normal
 - **Usuario:** Francisco  
 - **Correo:** francisco@gmail.com  
-- **Contrase?a:** 123qwe  
+- **Contraseña:** 123qwe  
 
 ---
 
@@ -109,7 +109,7 @@ El frontend quedara disponible en `https://localhost:57565/`.
 
 ---
 
-##? Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - **Backend:** .NET 6, Entity Framework Core, Pomelo MySQL Provider  
 - **Frontend:** React, JavaScript, CSS  
