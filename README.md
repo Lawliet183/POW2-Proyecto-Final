@@ -109,7 +109,7 @@ El frontend quedar¨¢ disponible en `https://localhost:57565/`.
 
 ---
 
-##? Tecnolog¨ªas utilizadas
+##? Tecnologias utilizadas
 
 - **Backend:** .NET 6, Entity Framework Core, Pomelo MySQL Provider  
 - **Frontend:** React, JavaScript, CSS  
